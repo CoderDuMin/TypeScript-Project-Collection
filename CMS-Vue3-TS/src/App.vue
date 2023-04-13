@@ -3,23 +3,21 @@ import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
 interface IKun {
-  name:string,
-  age:number,
-  solgon:string
+  name: string,
+  age: number,
+  solgon: string
 }
 
-const ikun:IKun = {
-  name:'kun1',
-  age:18,
-  solgon:'rap'
+const ikun: IKun = {
+  name: 'kun1',
+  age: 18,
+  solgon: 'rap'
 }
-console.log(ikun)
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
