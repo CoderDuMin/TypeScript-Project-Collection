@@ -3,5 +3,6 @@ import App from "./App.vue"
 
 import "normalize.css"
 import "./assets/main.css"
+import pinia from "./store"
 
-createApp(App).mount("#app")
+createApp(App).use(pinia).mount("#app")
