@@ -10,8 +10,7 @@ const changeCount = () => {
 
 <template>
   <div>
-    <h2>{{ countStore.count }} -> {{ countStore.doubleCounter }}</h2>
-    <button @click="changeCount">改变数字</button>
+    <RouterView></RouterView>
   </div>
 </template>
 
