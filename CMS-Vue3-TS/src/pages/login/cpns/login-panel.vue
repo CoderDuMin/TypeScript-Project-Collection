@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ElCheckbox, ElLink, ElButton, ElTabs, ElTabPane, ElForm, ElFormItem, ElInput } from 'element-plus'
+// import { ElCheckbox, ElLink, ElButton, ElTabs, ElTabPane, ElForm, ElFormItem, ElInput } from 'element-plus'
 
 const currentTab = ref('account')
 const form = ref({
