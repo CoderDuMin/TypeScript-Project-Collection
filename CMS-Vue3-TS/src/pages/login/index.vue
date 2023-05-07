@@ -12,7 +12,7 @@ import LoginPanel from './cpns/login-panel.vue'
 .login {
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(transparent 1px, #fff 1px);
+  background: linear-gradient(-135deg, #e8a57b, #6ecffe);
 
   display: flex;
   align-items: center;
