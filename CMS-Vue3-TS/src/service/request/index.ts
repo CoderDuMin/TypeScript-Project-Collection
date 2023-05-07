@@ -1,6 +1,7 @@
 import axios from "axios"
 import type { AxiosInstance } from "axios"
 import type { DMRequestConfig } from "./type"
+import { ElMessage } from "element-plus"
 
 // 拦截器: 蒙版Loading/token/修改配置
 
@@ -39,7 +40,7 @@ class DMRequest {
                 return res.data
             },
             (err) => {
-                console.log("全局响应失败的拦截")
+                ElMessage.error(err?.response?.data)
                 return err
             }
         )
