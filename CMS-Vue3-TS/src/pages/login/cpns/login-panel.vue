@@ -20,14 +20,15 @@
 </template>
 
 <script setup lang="ts">
+import { LOGIN_REMPWD } from '@/common/constants';
 import { login } from '@/service/modules/login';
-import { ref } from 'vue'
+import { localCache } from '@/utils/cache';
+import { ref, watch } from 'vue'
 import LoginAccount from './login-account.vue'
 import LoginPhone from './login-phone.vue'
 
-
 const currentTab = ref('account')
-const isKeepPwd = ref(false)
+const isKeepPwd = ref<boolean>(!!localCache.getCache(LOGIN_REMPWD))
 
 const loginAccountRef = ref<InstanceType<typeof LoginAccount>>()
 const loginPhoneRef = ref<InstanceType<typeof LoginPhone>>()
@@ -35,11 +36,15 @@ const loginPhoneRef = ref<InstanceType<typeof LoginPhone>>()
 
 const handleLogin = () => {
   if (currentTab.value == 'account') {
-    loginAccountRef.value?.loginAction()
+    loginAccountRef.value?.loginAction(isKeepPwd.value)
   } else {
     loginPhoneRef.value?.loginAction()
   }
 }
+
+watch(isKeepPwd, (newValue) => {
+  localCache.setCache(LOGIN_REMPWD, newValue)
+})
 </script>
 
 <style scoped lang="scss">

@@ -15,13 +15,15 @@
 import { ref } from 'vue';
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus';
 import { useLoginStore } from '@/store/modules/login'
+import { localCache } from '@/utils/cache';
+import { LOGIN_ACCOUNT, LOGIN_PASSWORD } from '@/common/constants';
 
 const loginStore = useLoginStore()
 const formRef = ref<FormInstance>()
 
 const form = ref({
-  name: '',
-  password: '',
+  name: localCache.getCache(LOGIN_ACCOUNT) ?? '',
+  password: localCache.getCache(LOGIN_PASSWORD) ?? '',
 })
 const formRules: FormRules = {
   name: [
@@ -33,12 +35,19 @@ const formRules: FormRules = {
   ]
 }
 
-const loginAction = () => {
+const loginAction = (isRemPwd: boolean) => {
   formRef.value?.validate((valid) => {
     if (valid) {
       console.log('账号登录action', form.value)
       let account = form.value
       loginStore.loginAction(account)
+      if (isRemPwd) {
+        localCache.setCache(LOGIN_ACCOUNT, account.name)
+        localCache.setCache(LOGIN_PASSWORD, account.password)
+      } else {
+        localCache.removeCache(LOGIN_ACCOUNT)
+        localCache.removeCache(LOGIN_PASSWORD)
+      }
     }
     else {
       ElMessage.error('请确认登录格式是否正确!')

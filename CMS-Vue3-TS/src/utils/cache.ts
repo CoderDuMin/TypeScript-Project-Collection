@@ -11,7 +11,8 @@ class CacheStorage {
         this.storage.setItem(key, JSON.stringify(value))
     }
     getCache(key: string) {
-        return this.storage.getItem(key)
+        let value = this.storage.getItem(key)
+        return value ? JSON.parse(value) : ""
     }
     removeCache(key: string) {
         this.storage.removeItem(key)
