@@ -2,6 +2,8 @@ import axios from "axios"
 import type { AxiosInstance } from "axios"
 import type { DMRequestConfig } from "./type"
 import { ElMessage } from "element-plus"
+import { localCache } from "@/utils/cache"
+import { LOGIN_TOKEN } from "@/common/constants"
 
 // 拦截器: 蒙版Loading/token/修改配置
 
@@ -25,8 +27,11 @@ class DMRequest {
         // 每个instance实例都添加拦截器
         this.instance.interceptors.request.use(
             (config) => {
-                // loading/token
-                console.log("全局请求成功的拦截")
+                let token = localCache.getCache(LOGIN_TOKEN)
+                if (config.headers && token) {
+                    config.headers.Authorization = "Bearer " + token
+                }
+                return config
                 return config
             },
             (err) => {
@@ -36,7 +41,6 @@ class DMRequest {
         )
         this.instance.interceptors.response.use(
             (res) => {
-                console.log("全局响应成功的拦截")
                 return res.data
             },
             (err) => {

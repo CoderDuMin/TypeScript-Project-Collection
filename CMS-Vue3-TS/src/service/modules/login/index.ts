@@ -6,3 +6,15 @@ export function login(account: any) {
         data: account
     })
 }
+
+export function getUserById(id: any) {
+    return dmRequest.get({
+        url: "/users/" + id
+    })
+}
+
+export function getRoleMenuById(id: any) {
+    return dmRequest.get({
+        url: `/role/${id}/menu`
+    })
+}

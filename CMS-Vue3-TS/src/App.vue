@@ -9,7 +9,7 @@ const changeCount = () => {
 </script>
 
 <template>
-  <div>
+  <div style="height: 100%;width: 100%;">
     <RouterView></RouterView>
   </div>
 </template>
