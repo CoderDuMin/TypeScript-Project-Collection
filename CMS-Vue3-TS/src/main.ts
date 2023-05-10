@@ -7,7 +7,7 @@ import "element-plus/dist/index.css"
 // app.use(ElementPlus)
 
 import "normalize.css"
-import "./assets/main.css"
+import "./assets/css/main.css"
 import pinia from "./store"
 import router from "./router"
 
