@@ -3,16 +3,16 @@
     <!-- 1.logo -->
     <div class="logo">
       <img class="img" src="@/assets/img/logo.svg" alt="" />
-      <h2 class="title">后台管理系统</h2>
+      <h2 class="title" v-show="!isFold">后台管理系统</h2>
     </div>
     <!-- 2.menu -->
     <div class="menu">
-      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#001529">
+      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#001529" :collapse="isFold">
         <template v-for="item in loginStore.userMenu" :key="item.id">
           <el-sub-menu :index="item.id">
             <template #title>
               <el-icon>
-                <location />
+                <component :is="item.icon.split('-icon-')[1]"></component>
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
@@ -28,6 +28,13 @@
 
 <script setup lang="ts">
 import { useLoginStore } from '@/store/modules/login';
+
+defineProps({
+  isFold: {
+    type: Boolean,
+    requried: true
+  }
+})
 
 const loginStore = useLoginStore()
 console.log(loginStore.userMenu)

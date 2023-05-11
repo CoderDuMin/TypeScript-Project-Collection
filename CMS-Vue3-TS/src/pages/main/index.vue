@@ -1,11 +1,13 @@
 <template>
   <div class="app-main">
     <el-container class="main-content">
-      <el-aside width="200px">
-        <NavMenu />
+      <el-aside :width="isFold ? '60px' : '210px'">
+        <NavMenu :is-fold="isFold" />
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <NavHeader :is-fold="isFold" @fold="isFold = !isFold" />
+        </el-header>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -14,6 +16,10 @@
 
 <script setup lang="ts">
 import NavMenu from '@/components/nav-menu/index.vue'
+import NavHeader from '@/components/nav-header/index.vue'
+import { ref } from 'vue';
+
+const isFold = ref(false)
 </script>
 
 <style scoped lang="scss">
@@ -29,6 +35,7 @@ import NavMenu from '@/components/nav-menu/index.vue'
     height: 100%;
     // background-color: #e0e0e0;
     background-color: #001529;
+    transition: width 0.3s ease;
   }
 
   .el-header {
