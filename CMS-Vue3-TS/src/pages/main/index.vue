@@ -39,7 +39,11 @@ const isFold = ref(false)
   }
 
   .el-header {
-    background: sandybrown;
+    background: #fff;
+  }
+
+  .el-main {
+    background-color: #f0f2f5;
   }
 }
 </style>

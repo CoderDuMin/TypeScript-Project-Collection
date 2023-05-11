@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-
+import HeaderInfo from './c-cpns/head-info.vue'
 const emit = defineEmits(['fold'])
 defineProps({
   isFold: {
