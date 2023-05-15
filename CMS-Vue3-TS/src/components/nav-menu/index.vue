@@ -7,8 +7,9 @@
     </div>
     <!-- 2.menu -->
     <div class="menu">
-      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#001529" :collapse="isFold">
-        <template v-for="item in loginStore.userMenu" :key="item.id">
+      <el-menu text-color="#b7bdc3" active-text-color="#fff" background-color="#001529" :default-active="defaultActive"
+        :collapse="isFold">
+        <template v-for="item in loginStore.userMenus" :key="item.id">
           <el-sub-menu :index="item.id">
             <template #title>
               <el-icon>
@@ -17,7 +18,7 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="cMenu in item.children" :key="cMenu.id">
-              <el-menu-item :index="cMenu.id">{{ cMenu.name }}</el-menu-item>
+              <el-menu-item :index="cMenu.id" @click="handleItemClick(cMenu)">{{ cMenu.name }}</el-menu-item>
             </template>
           </el-sub-menu>
         </template>
@@ -28,6 +29,9 @@
 
 <script setup lang="ts">
 import { useLoginStore } from '@/store/modules/login';
+import { mapPathToMenu } from '@/utils/map-menus';
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 defineProps({
   isFold: {
@@ -37,7 +41,22 @@ defineProps({
 })
 
 const loginStore = useLoginStore()
-console.log(loginStore.userMenu)
+console.log(loginStore.userMenus)
+
+const router = useRouter()
+const handleItemClick = (item: any) => {
+  router.push(item.url)
+}
+
+// 3.ElMenu的默认菜单
+const route = useRoute()
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, loginStore.userMenus)
+  if (!pathMenu) {
+    return ''
+  }
+  return pathMenu.id + ''
+})
 </script>
 
 <style scoped lang="scss">

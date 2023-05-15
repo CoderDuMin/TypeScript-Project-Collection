@@ -3,28 +3,27 @@ import { localCache } from "@/utils/cache"
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
-    routes: [
-        {
-            path: "/",
-            redirect: "/main"
-        },
-        {
-            path: "/main",
-            name: "main",
-            component: () => import("@/pages/main/index.vue")
-        },
-        {
-            path: "/home",
-            name: "home",
-            component: () => import("@/pages/home/index.vue")
-        },
-        {
-            path: "/login",
-            name: "login",
-            component: () => import("@/pages/login/index.vue")
-        }
-    ],
-    history: createWebHistory()
+  history: createWebHistory(),
+  // 映射关系: path => component
+  routes: [
+    {
+      path: '/',
+      redirect: '/main'
+    },
+    {
+      path: '/login',
+      component: () => import('../views/login/index.vue')
+    },
+    {
+      path: '/main',
+      name: 'main',
+      component: () => import('../views/main/index.vue')
+    },
+    {
+      path: '/:pathMatch(.*)',
+      component: () => import('../views/not-found/NotFound.vue')
+    }
+  ]
 })
 
 router.beforeEach((to, from) => {

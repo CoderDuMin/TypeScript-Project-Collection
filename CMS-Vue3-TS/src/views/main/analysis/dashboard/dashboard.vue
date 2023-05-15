@@ -1,13 +1,13 @@
 <template>
-  <div class="overview">
-    <h2>overview</h2>
+  <div class="dashboard">
+    <h2>dashboard</h2>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style lang="less" scoped>
-.overview {
+<style lang="scss" scoped>
+.dashboard {
   color: red;
 }
 </style>
