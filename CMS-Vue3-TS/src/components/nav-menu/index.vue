@@ -55,7 +55,8 @@ const defaultActive = computed(() => {
   if (!pathMenu) {
     return ''
   }
-  return pathMenu.id + ''
+  console.log('pathMenu', pathMenu)
+  return pathMenu.id
 })
 </script>
 

@@ -6,7 +6,9 @@
       </el-icon>
     </div>
     <div class="content">
-      <div class="breadcrumb">面包屑</div>
+      <div class="breadcrumb">
+        <HeadCrumb />
+      </div>
       <header-info />
     </div>
   </div>
@@ -14,6 +16,7 @@
 
 <script setup lang="ts">
 import HeaderInfo from './c-cpns/head-info.vue'
+import HeadCrumb from './c-cpns/head-crumb.vue'
 const emit = defineEmits(['fold'])
 defineProps({
   isFold: {
