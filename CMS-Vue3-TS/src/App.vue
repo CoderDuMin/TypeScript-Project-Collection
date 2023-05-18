@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useCounterStore from '@/store/modules/counter'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 const countStore = useCounterStore()
 
@@ -10,7 +11,9 @@ const changeCount = () => {
 
 <template>
   <div style="height: 100%;width: 100%;">
-    <RouterView></RouterView>
+    <el-config-provider :locale="zhCn">
+      <RouterView></RouterView>
+    </el-config-provider>
   </div>
 </template>
 
