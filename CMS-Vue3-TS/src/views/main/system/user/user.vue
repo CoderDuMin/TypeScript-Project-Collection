@@ -8,17 +8,20 @@
 <script setup lang="ts">
 import SearchBar from './cpns/search.vue'
 import UserContent from './cpns/content.vue'
-import { queryUserList } from '@/service/modules/system/user/index'
+import { useSystemStore } from '@/store/modules/system';
+import { storeToRefs } from 'pinia';
+
+const systemStore = useSystemStore()
+const { userList, userTotal } = storeToRefs(systemStore)
 
 const handleQuery = (query: any) => {
   console.log('查询', query)
-  queryUserList({
+  let param = {
     "offset": 0,
     "size": 10,
-    ...query
-  }).then(res => {
-    console.log('结果', res.data)
-  })
+    name: query.name || ''
+  }
+  systemStore.getUserListAction(param)
 }
 </script>
 

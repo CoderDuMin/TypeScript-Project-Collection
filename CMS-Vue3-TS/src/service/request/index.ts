@@ -32,7 +32,6 @@ class DMRequest {
                     config.headers.Authorization = "Bearer " + token
                 }
                 return config
-                return config
             },
             (err) => {
                 console.log("全局请求失败的拦截")

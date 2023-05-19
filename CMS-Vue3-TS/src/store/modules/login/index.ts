@@ -64,6 +64,12 @@ const useLoginStore = defineStore("login", {
             const routes = mapMenusToRoutes(userMenus)
             routes.forEach((route) => router.addRoute('main', route))
           }
+        },
+        logoutAction(){
+          localCache.clear()
+          this.token = ''
+          this.userInfo = {}
+          this.userMenus = {}
         }
     }
 })
