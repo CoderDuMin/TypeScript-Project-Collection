@@ -16,8 +16,12 @@
           <el-option label="禁用" :value="2" />
         </el-select>
       </el-form-item>
-      <el-form-item label="创建时间" style="width: 480px;" prop="createAt">
+      <el-form-item label="创建时间" style="width: 440px;" prop="createAt">
         <el-date-picker v-model="form.createAt" type="datetimerange" range-separator="-" start-placeholder="开始日期"
+          end-placeholder="结束日期" />
+      </el-form-item>
+      <el-form-item label="更新时间" style="width: 440px;" prop="createAt">
+        <el-date-picker v-model="form.updateAt" type="datetimerange" range-separator="-" start-placeholder="开始日期"
           end-placeholder="结束日期" />
       </el-form-item>
       <el-form-item>
@@ -37,7 +41,8 @@ type formType = {
   realname: string,
   cellphone: string,
   enable: number,
-  createAt: any[]
+  createAt: any,
+  updateAt: any
 }
 
 const emit = defineEmits(['query', 'reset'])
@@ -47,7 +52,8 @@ const form = ref<formType>({
   realname: '',
   cellphone: '',
   enable: 1,
-  createAt: []
+  createAt: [],
+  updateAt: []
 })
 
 const handleQuery = () => {
@@ -66,7 +72,8 @@ const handleReset = () => {
     realname: '',
     cellphone: '',
     enable: 1,
-    createAt: []
+    createAt: [],
+    updateAt: []
   }
   emit('query', form.value)
 
