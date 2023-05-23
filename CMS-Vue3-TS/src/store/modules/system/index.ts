@@ -1,4 +1,4 @@
-import { queryUserList } from "@/service/modules/system/user";
+import { deleteUserById, queryUserList } from "@/service/modules/system/user";
 import { defineStore } from "pinia";
 
 interface ISystemState {
@@ -19,6 +19,11 @@ const useSystemStore = defineStore('system',{
         console.log('userlist',res.data)
         this.userList = res.data.list
         this.userTotal = res.data.totalCount
+      })
+    },
+    deleteUserAction(id:any){
+      deleteUserById(id).then(res => {
+        this.getUserListAction({size:'10',offset:'0'})
       })
     }
   }

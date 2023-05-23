@@ -6,3 +6,9 @@ export function queryUserList(queryParams: any) {
         data: queryParams
     })
 }
+
+export function deleteUserById(id: any) {
+  return dmRequest.delete({
+      url: "/users/"+id,
+  })
+}

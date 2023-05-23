@@ -52,8 +52,8 @@ const form = ref<formType>({
   realname: '',
   cellphone: '',
   enable: 1,
-  createAt: [],
-  updateAt: []
+  createAt: '',
+  updateAt: ''
 })
 
 const handleQuery = () => {
@@ -72,8 +72,8 @@ const handleReset = () => {
     realname: '',
     cellphone: '',
     enable: 1,
-    createAt: [],
-    updateAt: []
+    createAt: '',
+    updateAt: ''
   }
   emit('query', form.value)
 

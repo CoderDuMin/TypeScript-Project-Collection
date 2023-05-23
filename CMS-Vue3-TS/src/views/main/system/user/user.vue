@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <SearchBar @query="handleQuery" />
-    <UserContent />
+    <UserContent ref="contentRef" />
   </div>
 </template>
 
@@ -10,18 +10,16 @@ import SearchBar from './cpns/search.vue'
 import UserContent from './cpns/content.vue'
 import { useSystemStore } from '@/store/modules/system';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
 const systemStore = useSystemStore()
 const { userList, userTotal } = storeToRefs(systemStore)
 
+const contentRef = ref<InstanceType<typeof UserContent>>()
+
 const handleQuery = (query: any) => {
   console.log('查询', query)
-  let param = {
-    "offset": 0,
-    "size": 10,
-    name: query.name || ''
-  }
-  systemStore.getUserListAction(param)
+  contentRef.value!.queryUser(query)
 }
 </script>
 
