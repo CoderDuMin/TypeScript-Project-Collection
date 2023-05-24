@@ -54,6 +54,8 @@ import UserModal from './user-modal.vue'
 const systemStore = useSystemStore()
 const { userList, userTotal } = storeToRefs(systemStore)
 
+const userModalRef = ref<InstanceType<typeof UserModal>>()
+
 const pageSize = ref(10)
 const pageNum = ref(1)
 const cacheQuery = ref<any>({})
@@ -91,6 +93,7 @@ const handleDelete = (id: number) => {
 }
 const AddUser = () => {
   console.log('新建用户')
+  userModalRef.value?.open()
 }
 
 let huan = 0
