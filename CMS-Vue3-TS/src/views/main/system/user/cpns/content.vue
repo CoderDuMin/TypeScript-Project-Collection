@@ -29,7 +29,7 @@
         </el-table-column>
         <el-table-column label="操作" width="220">
           <template #default="scope">
-            <el-button text type="primary" icon="edit">编辑</el-button>
+            <el-button text type="primary" icon="edit" @click="editUser(scope.row)">编辑</el-button>
             <el-button text type="danger" icon="delete" @click="handleDelete(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
@@ -83,7 +83,7 @@ const queryUser = (query?: any) => {
   cacheQuery.value = query
   let queryParams = {
     size: pageSize.value,
-    offset: pageNum.value,
+    offset: pageNum.value - 1,
     ...cacheQuery.value
   }
   systemStore.getUserListAction(queryParams)
@@ -94,6 +94,10 @@ const handleDelete = (id: number) => {
 const AddUser = () => {
   console.log('新建用户')
   userModalRef.value?.open()
+}
+const editUser = (info: any) => {
+  console.log('编辑用户')
+  userModalRef.value?.open(true, info)
 }
 
 let huan = 0

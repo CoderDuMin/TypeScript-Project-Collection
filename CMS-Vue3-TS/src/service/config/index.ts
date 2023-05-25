@@ -13,7 +13,7 @@ let BASE_URL = ""
 if (import.meta.env.PROD) {
     BASE_URL = "http://codercba.prod:8000"
 } else {
-    BASE_URL = "http://codercba.com:5000" //"http://coderwhy.dev:8000"
+    BASE_URL = "http://123.207.32.32:5000" //"http://coderwhy.dev:8000"
 }
 
 console.log(BASE_URL)

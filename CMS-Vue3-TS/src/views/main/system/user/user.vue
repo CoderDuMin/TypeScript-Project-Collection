@@ -11,9 +11,13 @@ import UserContent from './cpns/content.vue'
 import { useSystemStore } from '@/store/modules/system';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { useMainStore } from '@/store/modules/main';
 
 const systemStore = useSystemStore()
 const { userList, userTotal } = storeToRefs(systemStore)
+const mainStore = useMainStore()
+mainStore.getRoleListAction()
+mainStore.getDepartmentListAction()
 
 const contentRef = ref<InstanceType<typeof UserContent>>()
 
