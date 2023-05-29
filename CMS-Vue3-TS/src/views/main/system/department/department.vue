@@ -1,12 +1,15 @@
 <template>
   <div class="department">
-    <h2>department</h2>
+    <PageSearch />
+    <PageContent />
   </div>
 </template>
 
-<script setup lang="ts" name="department"></script>
+<script setup lang="ts" >
+import PageSearch from './cpns/page-search.vue'
+import PageContent from './cpns/page-content.vue'
+</script>
 
 <style scoped>
-.department {
-}
+.department {}
 </style>
