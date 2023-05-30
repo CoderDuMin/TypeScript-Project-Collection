@@ -1,27 +1,18 @@
 <template>
   <div class="user-modal">
     <el-dialog v-model="dialogVisible" :title="addStatus ? '新建部门' : '编辑部门'" width="30%" :before-close="handleClose">
-      <el-form :model="addForm" class="add-form" label-width="100px">
-        <el-form-item label="用户名">
-          <el-input v-model="addForm.name" />
+      <el-form :model="formData" label-width="80px" size="large">
+        <el-form-item label="部门名称" prop="name">
+          <el-input v-model="formData.name" placeholder="请输入部门名称" />
         </el-form-item>
-        <el-form-item label="真实姓名">
-          <el-input v-model="addForm.realname" />
+        <el-form-item label="部门领导" prop="leader">
+          <el-input v-model="formData.leader" placeholder="请输入部门领导" />
         </el-form-item>
-        <el-form-item label="密码" v-if="addStatus">
-          <el-input v-model="addForm.password" show-password />
-        </el-form-item>
-        <el-form-item label="手机号">
-          <el-input v-model="addForm.cellphone" />
-        </el-form-item>
-        <el-form-item label="角色">
-          <el-select v-model="addForm.roleId" placeholder="请选择角色" style="width:100%;">
-            <el-option v-for="item in roleList" :key="item.id" :label="item.name" :value="item.id" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="所属部门">
-          <el-select v-model="addForm.departmentId" placeholder="请选择部门" style="width:100%;">
-            <el-option v-for="item in departmentList" :key="item.id" :label="item.name" :value="item.id" />
+        <el-form-item label="选择部门" prop="parentId">
+          <el-select v-model="formData.parentId" placeholder="请选择部门" style="width: 100%">
+            <template v-for="item in departmentList" :key="item.id">
+              <el-option :label="item.name" :value="item.id" />
+            </template>
           </el-select>
         </el-form-item>
       </el-form>
@@ -49,43 +40,29 @@ const { departmentList, roleList } = storeToRefs(mainStore)
 
 const dialogVisible = ref(false)
 const addStatus = ref(true)
-const addForm = ref<any>({
-  name: '',
-  realname: '',
-  password: '',
-  cellphone: '',
-  departmentId: '',
-  roleId: ''
+const formData = ref<any>({
 })
 
 const handleClose = () => {
   addStatus.value = true
-  addForm.value = {
-    name: '',
-    realname: '',
-    password: '',
-    cellphone: '',
-    departmentId: '',
-    roleId: ''
+  formData.value = {
   }
   dialogVisible.value = false
 }
 const onSubmit = () => {
-  console.log('submit', addForm.value)
+  console.log('submit', formData.value)
   if (addStatus.value) {
-    let form = { ...addForm.value }
-    systemStore.addNewUserAction(form)
+    let form = { ...formData.value }
+    systemStore.newPageDataAction('department', form)
     handleClose()
   } else {
-    let id = addForm.value.id
+    let id = formData.value.id
     let form: any = {
-      name: addForm.value.name,
-      realname: addForm.value.realname,
-      cellphone: addForm.value.cellphone,
-      departmentId: addForm.value.departmentId,
-      roleId: addForm.value.roleId
+      leader: formData.value.leader,
+      name: formData.value.name,
+      parentId: formData.value.parentId
     }
-    systemStore.editUserAction(id, form)
+    systemStore.editPageDataAction('department', id, form)
     handleClose()
   }
 }
@@ -94,7 +71,7 @@ const open = (isEdit: boolean = false, info?: any) => {
   dialogVisible.value = true
   if (isEdit && info) {
     addStatus.value = false
-    addForm.value = info
+    formData.value = { ...info }
   }
 }
 

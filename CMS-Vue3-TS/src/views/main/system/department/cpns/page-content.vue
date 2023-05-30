@@ -6,28 +6,22 @@
     </div>
     <div class="table">
       <el-table :data="pageList" stripe style="width: 100%;">
-        <el-table-column type="selection" width="55" />
-        <el-table-column prop="name" label="用户名" width="120" />
-        <el-table-column prop="realname" label="真实姓名" />
-        <el-table-column prop="roleId" label="角色" />
-        <el-table-column prop="cellphone" label="手机号" />
-        <el-table-column prop="enable" label="用户状态">
-          <template #default="scope">
-            <el-button :type="scope.row.enable == 1 ? 'primary' : 'danger'" plain>{{ scope.row.enable == 1 ? '启用' : '禁用'
-            }}</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column prop="createAt" label="创建时间">
+        <el-table-column align="center" type="index" label="序号" width="60px" />
+
+        <el-table-column align="center" label="部门名称" prop="name" width="150px" />
+        <el-table-column align="center" label="部门领导" prop="leader" width="150px" />
+        <el-table-column align="center" label="上级部门" prop="parentId" width="150px" />
+        <el-table-column align="center" label="创建时间" prop="createAt">
           <template #default="scope">
             {{ formatUTC(scope.row.createAt) }}
           </template>
         </el-table-column>
-        <el-table-column prop="updateAt" label="更新时间">
+        <el-table-column align="center" label="更新时间" prop="updateAt">
           <template #default="scope">
             {{ formatUTC(scope.row.updateAt) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="220">
+        <el-table-column label="操作" width="220" align="center">
           <template #default="scope">
             <el-button text type="primary" icon="edit" @click="editUser(scope.row)">编辑</el-button>
             <el-button text type="danger" icon="delete" @click="handleDelete(scope.row.id)">删除</el-button>
@@ -78,18 +72,18 @@ const sizeChange = () => {
   systemStore.postPageListAction('department', queryParams)
 }
 
-const queryUser = (query?: any) => {
+const queryPage = (query?: any) => {
   pageNum.value = 1
-  cacheQuery.value = query
+  cacheQuery.value = { ...query }
   let queryParams = {
     size: pageSize.value,
     offset: pageNum.value - 1,
     ...cacheQuery.value
   }
-  systemStore.getUserListAction(queryParams)
+  systemStore.postPageListAction('department', queryParams)
 }
 const handleDelete = (id: number) => {
-  systemStore.deleteUserAction(id)
+  systemStore.deletePageByIdAction('department', id)
 }
 const AddUser = () => {
   console.log('新建用户')
@@ -120,7 +114,7 @@ sum(21)
 console.log('asdasd', huan)
 
 defineExpose({
-  queryUser
+  queryPage
 })
 </script>
 
