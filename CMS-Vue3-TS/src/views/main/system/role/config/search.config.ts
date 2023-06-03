@@ -7,12 +7,12 @@ const searchConfig = {
       placeholder: '请输入查询的角色名称',
       initialValue: ''
     },
-    {
-      type: 'input',
-      prop: 'leader',
-      label: '权限介绍',
-      placeholder: '请输入查询的权限介绍'
-    },
+    // {
+    //   type: 'input',
+    //   prop: 'leader',
+    //   label: '权限介绍',
+    //   placeholder: '请输入查询的权限介绍'
+    // },
     {
       type: 'date-picker',
       prop: 'createAt',

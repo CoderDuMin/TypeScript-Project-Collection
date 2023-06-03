@@ -1,31 +1,62 @@
 <template>
   <div class="department">
-    <PageSearch :search-config="searchConfig" @query-click="handleQuery" @reset-click="handleReset" />
-    <PageContent ref="contentRef" />
+    <page-search :search-config="searchConfig" @query-click="handleQueryClick" @reset-click="handleResetClick" />
+    <page-content :content-config="contentConfig" ref="contentRef" @new-click="handleNewClick"
+      @edit-click="handleEditClick">
+      <template #leader="scope">
+        <span class="leader">哈哈哈: {{ scope.row[scope.prop] }}</span>
+      </template>
+      <template #parent="scope">
+        <span class="parent">呵呵呵: {{ scope.row[scope.prop] }}</span>
+      </template>
+    </page-content>
+    <page-modal :modal-config="modalConfigRef" ref="modalRef" />
   </div>
 </template>
 
-<script setup lang="ts" >
+<script setup lang="ts" name="department">
+import { ref, computed } from 'vue'
+import { useMainStore } from '@/store/modules/main/index'
+
 import PageSearch from '@/components/page-search/page-search.vue'
-import PageContent from './cpns/page-content.vue'
-import searchConfig from './config/search.config';
-import { onMounted, ref } from 'vue';
+import PageContent from '@/components/page-content/page-content.vue'
+import PageModal from '@/components/page-modal/page-modal.vue'
 
-const contentRef = ref<InstanceType<typeof PageContent>>()
+import searchConfig from './config/search.config'
+import contentConfig from './config/content.config'
+import modalConfig from './config/modal.config'
+import usePageContent from '@/hooks/usePageContent'
+import usePageModal from '@/hooks/usePageModal'
 
-const handleQuery = (searchForm: any) => {
-  contentRef.value?.queryPage(searchForm)
-}
-const handleReset = () => {
-  contentRef.value?.queryPage({})
-}
+// 对modalConfig进行操作
+const modalConfigRef = computed(() => {
+  const mainStore = useMainStore()
+  const departments = mainStore.departmentList.map((item) => {
+    return { label: item.name, value: item.id }
+  })
+  modalConfig.formItems.forEach((item) => {
+    if (item.prop === 'parentId') {
+      item.options.push(...departments)
+    }
+  })
 
-onMounted(() => {
-  contentRef.value?.queryPage({})
+  return modalConfig
 })
 
+// setup相同的逻辑的抽取: hooks
+// 点击search, content的操作
+const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
+
+// 点击content, modal的操作
+const { modalRef, handleNewClick, handleEditClick } = usePageModal()
 </script>
 
-<style scoped>
-.department {}
+<style scoped lang="scss">
+.leader {
+  color: red;
+}
+
+.parent {
+  color: blue;
+}
 </style>

@@ -115,7 +115,7 @@ function handleEditBtnClick(itemData: any) {
 defineExpose({ fetchPageListData })
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .content {
   margin-top: 20px;
   padding: 20px;
