@@ -15,9 +15,6 @@ import { useMainStore } from '@/store/modules/main';
 
 const systemStore = useSystemStore()
 const { userList, userTotal } = storeToRefs(systemStore)
-const mainStore = useMainStore()
-mainStore.getRoleListAction()
-mainStore.getDepartmentListAction()
 
 const contentRef = ref<InstanceType<typeof UserContent>>()
 

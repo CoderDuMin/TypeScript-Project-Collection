@@ -21,3 +21,9 @@ export function getDepartmentList(queryParams?: any) {
       }
   })
 }
+
+export function getMenuList() {
+  return dmRequest.post({
+      url: "/menu/list",
+  })
+}

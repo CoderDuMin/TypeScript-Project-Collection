@@ -5,8 +5,8 @@
       @edit-click="handleEditClick" />
     <page-modal :modal-config="modalConfig" :other-info="otherInfo" ref="modalRef">
       <template #menulist>
-        <el-tree ref="treeRef" :data="entireMenus" show-checkbox node-key="id"
-          :props="{ children: 'children', label: 'name' }" @check="handleElTreeCheck" />
+        <el-tree ref="treeRef" :data="menuList" show-checkbox node-key="id"
+          :props="{ children: 'children', label: 'name' }" @check="" />
       </template>
     </page-modal>
   </div>
@@ -34,6 +34,9 @@ import { useMainStore } from '@/store/modules/main/index'
 // 逻辑关系
 const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
 const { modalRef, handleNewClick, handleEditClick } = usePageModal()
+
+const mainStore = useMainStore()
+const { menuList } = storeToRefs(mainStore)
 
 
 </script>

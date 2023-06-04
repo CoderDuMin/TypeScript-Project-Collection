@@ -17,11 +17,15 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useMainStore } from '@/store/modules/main';
 import NavMenu from '@/components/nav-menu/index.vue'
 import NavHeader from '@/components/nav-header/index.vue'
-import { ref } from 'vue';
 
 const isFold = ref(false)
+
+const mainStore = useMainStore()
+mainStore.getInitialDataAction()
 </script>
 
 <style scoped lang="scss">
