@@ -84,3 +84,24 @@ export function mapPathToBreadcrumbs(path: string, userMenus: any[]) {
   }
   return breadcrumbs
 }
+
+/**
+ * 获取菜单id集合
+ * @param menuList
+ */
+export function mapMenusToIds(menuList:any[]){
+  let menuIds:number[] = []
+
+  function rescureGetIds(menus:any){
+    menus.map((menu:any) => {
+      if(menu.children){
+        return rescureGetIds(menu.children)
+      }else{
+        menuIds.push(menu.id)
+      }
+    })
+  }
+  rescureGetIds(menuList)
+
+  return menuIds
+}

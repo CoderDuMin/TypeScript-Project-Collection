@@ -6,7 +6,7 @@
     <page-modal :modal-config="modalConfig" :other-info="otherInfo" ref="modalRef">
       <template #menulist>
         <el-tree ref="treeRef" :data="menuList" show-checkbox node-key="id"
-          :props="{ children: 'children', label: 'name' }" @check="" />
+          :props="{ children: 'children', label: 'name' }" @check="handleCheckMenu" />
       </template>
     </page-modal>
   </div>
@@ -29,16 +29,34 @@ import modalConfig from './config/modal.config'
 import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
 import { useMainStore } from '@/store/modules/main/index'
-// import { mapMenuListToIds } from '@/utils/map-menus'
+import { mapMenusToIds } from '@/utils/map-menus'
 
 // 逻辑关系
 const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
-const { modalRef, handleNewClick, handleEditClick } = usePageModal()
+const { modalRef, handleNewClick, handleEditClick } = usePageModal(editCallBack)
 
 const mainStore = useMainStore()
 const { menuList } = storeToRefs(mainStore)
 
+const treeRef = ref()
 
+const otherInfo = ref({})
+const handleCheckMenu = (data: any, data2: any) => {
+  console.log('check', data, data2)
+  otherInfo.value = {
+    menuList: [...data2.checkedKeys, ...data2.halfCheckedKeys]
+  }
+  console.log('otherinfo', otherInfo.value)
+}
+
+function editCallBack(itemData: any) {
+  console.log('editCallBack', itemData)
+  nextTick(() => {
+    const menuIds = mapMenusToIds(itemData.menuList)
+    console.log(menuIds)
+    treeRef.value?.setCheckedKeys(menuIds)
+  })
+}
 </script>
 
 <style lang="less" scoped></style>
