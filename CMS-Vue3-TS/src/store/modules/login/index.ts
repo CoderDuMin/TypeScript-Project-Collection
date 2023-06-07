@@ -2,13 +2,14 @@ import { LOGIN_TOKEN } from "@/common/constants"
 import router from "@/router"
 import { getRoleMenuById, getUserById, login } from "@/service/modules/login"
 import { localCache } from "@/utils/cache"
-import { mapMenusToRoutes } from "@/utils/map-menus"
+import { mapMenusToPermissions, mapMenusToRoutes } from "@/utils/map-menus"
 import { defineStore } from "pinia"
 
 interface ILoginState {
     token: string
     userInfo: any
-    userMenus: any
+    userMenus: any,
+    permissions:string[]
 }
 
 const useLoginStore = defineStore("login", {
@@ -16,7 +17,8 @@ const useLoginStore = defineStore("login", {
         return {
             token: "",
             userInfo: {},
-            userMenus: {}
+            userMenus: {},
+            permissions:[]
         }
     },
     actions: {
@@ -35,6 +37,8 @@ const useLoginStore = defineStore("login", {
                     //3.根据角色请求用户的权限(菜单menus)
                     const userMenus = (await getRoleMenuById(id))?.data || []
                     this.userMenus = userMenus
+
+                    this.permissions = mapMenusToPermissions(userMenus)
 
                     // 4.进行本地缓存
                     localCache.setCache('userInfo', userInfo)
@@ -59,7 +63,7 @@ const useLoginStore = defineStore("login", {
             this.token = token
             this.userInfo = userInfo
             this.userMenus = userMenus
-
+            this.permissions = mapMenusToPermissions(userMenus)
             // 2.动态添加路由
             const routes = mapMenusToRoutes(userMenus)
             routes.forEach((route) => router.addRoute('main', route))
@@ -70,6 +74,7 @@ const useLoginStore = defineStore("login", {
           this.token = ''
           this.userInfo = {}
           this.userMenus = {}
+          this.permissions = []
         }
     }
 })

@@ -105,3 +105,24 @@ export function mapMenusToIds(menuList:any[]){
 
   return menuIds
 }
+
+/**
+ * 获取用户权限集合
+ * @param menuList
+ */
+ export function mapMenusToPermissions(menuList:any[]){
+  let permissions:string[] = []
+
+  function rescureGetPermissions(menus:any){
+    menus.map((menu:any) => {
+      if(menu.type === 3){
+        permissions.push(menu.permission)
+      }else{
+        menu.children && rescureGetPermissions(menu.children)
+      }
+    })
+  }
+  rescureGetPermissions(menuList)
+
+  return permissions
+}

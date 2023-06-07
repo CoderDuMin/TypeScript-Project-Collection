@@ -31,7 +31,7 @@ const modalConfigRef = computed(() => {
   })
   modalConfig.formItems.forEach((item) => {
     if (item.prop === 'parentId') {
-      item.options.push(...menulists)
+      (item.options as any[]).push(...menulists)
     }
   })
 

@@ -1,10 +1,10 @@
 import { LOGIN_TOKEN } from "@/common/constants"
 import { localCache } from "@/utils/cache"
 import { firstMenu } from "@/utils/map-menus"
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   // 映射关系: path => component
   routes: [
     {
