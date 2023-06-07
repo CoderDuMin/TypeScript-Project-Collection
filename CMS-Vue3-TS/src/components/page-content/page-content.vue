@@ -2,7 +2,7 @@
   <div class="content">
     <div class="header">
       <h3 class="title">{{ contentConfig?.header?.title ?? '数据列表' }}</h3>
-      <el-button type="primary" @click="handleNewUserClick">
+      <el-button v-if="isCreate" type="primary" @click="handleNewUserClick">
         {{ contentConfig?.header?.btnTitle ?? '新建数据' }}
       </el-button>
     </div>
@@ -19,10 +19,12 @@
           <template v-else-if="item.type === 'handler'">
             <el-table-column align="center" v-bind="item">
               <template #default="scope">
-                <el-button size="small" icon="Edit" type="primary" text @click="handleEditBtnClick(scope.row)">
+                <el-button v-if="isEdit" size="small" icon="Edit" type="primary" text
+                  @click="handleEditBtnClick(scope.row)">
                   编辑
                 </el-button>
-                <el-button size="small" icon="Delete" type="danger" text @click="handleDeleteBtnClick(scope.row.id)">
+                <el-button v-if="isDelete" size="small" icon="Delete" type="danger" text
+                  @click="handleDeleteBtnClick(scope.row.id)">
                   删除
                 </el-button>
               </template>
@@ -54,6 +56,7 @@ import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 import { useSystemStore } from '@/store/modules/system';
+import { useLoginStore } from '@/store/modules/login';
 
 interface IProps {
   contentConfig: {
@@ -76,7 +79,14 @@ const emit = defineEmits(['newClick', 'editClick'])
 const systemStore = useSystemStore()
 const currentPage = ref(1)
 const pageSize = ref(10)
-fetchPageListData()
+
+const loginStore = useLoginStore()
+
+// 定义按钮权限
+const isCreate = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:create`)
+const isEdit = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:update`)
+const isDelete = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:delete`)
+const isQuery = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:query`)
 
 // 2.获取usersList数据,进行展示
 const { pageList, pageTotalCount } = storeToRefs(systemStore)
@@ -91,6 +101,7 @@ function handleCurrentChange() {
 
 // 4.定义函数, 用于发送网络请求
 function fetchPageListData(formData: any = {}) {
+  if (!isQuery) return
   // 1.获取offset/size
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
@@ -111,6 +122,9 @@ function handleNewUserClick() {
 function handleEditBtnClick(itemData: any) {
   emit('editClick', itemData)
 }
+
+fetchPageListData()
+
 
 defineExpose({ fetchPageListData })
 </script>
