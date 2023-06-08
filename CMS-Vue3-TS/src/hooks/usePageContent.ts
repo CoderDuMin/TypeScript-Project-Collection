@@ -4,10 +4,10 @@ import type PageContent from '@/components/page-content/page-content.vue'
 function usePageContent() {
   const contentRef = ref<InstanceType<typeof PageContent>>()
   function handleQueryClick(queryInfo: any) {
-    contentRef.value?.fetchPageListData(queryInfo)
+    (contentRef as any).value?.fetchPageListData(queryInfo)
   }
   function handleResetClick() {
-    contentRef.value?.fetchPageListData()
+    (contentRef as any).value?.fetchPageListData()
   }
 
   return {

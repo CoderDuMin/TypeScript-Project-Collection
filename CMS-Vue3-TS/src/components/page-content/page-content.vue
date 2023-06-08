@@ -57,6 +57,7 @@ import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 import { useSystemStore } from '@/store/modules/system';
 import { useLoginStore } from '@/store/modules/login';
+import usePermission from '@/hooks/usePermission';
 
 interface IProps {
   contentConfig: {
@@ -83,10 +84,10 @@ const pageSize = ref(10)
 const loginStore = useLoginStore()
 
 // 定义按钮权限
-const isCreate = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:create`)
-const isEdit = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:update`)
-const isDelete = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:delete`)
-const isQuery = loginStore.permissions.includes(`system:${props.contentConfig.pageName}:query`)
+const isCreate = usePermission(`system:${props.contentConfig.pageName}:create`)
+const isEdit = usePermission(`system:${props.contentConfig.pageName}:update`)
+const isDelete = usePermission(`system:${props.contentConfig.pageName}:delete`)
+const isQuery = usePermission(`system:${props.contentConfig.pageName}:query`)
 
 // 2.获取usersList数据,进行展示
 const { pageList, pageTotalCount } = storeToRefs(systemStore)
