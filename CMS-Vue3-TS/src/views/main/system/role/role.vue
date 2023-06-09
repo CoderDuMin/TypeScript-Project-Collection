@@ -1,7 +1,7 @@
 <template>
   <div class="role">
     <page-search :search-config="searchConfig" @query-click="handleQueryClick" @reset-click="handleResetClick" />
-    <page-content :content-config="contentConfig" ref="contentRef" @new-click="handleNewClick"
+    <page-content :content-config="contentConfig" ref="contentRef" @new-click="handleNewRole"
       @edit-click="handleEditClick" />
     <page-modal :modal-config="modalConfig" :other-info="otherInfo" ref="modalRef">
       <template #menulist>
@@ -56,6 +56,11 @@ function editCallBack(itemData: any) {
     console.log(menuIds)
     treeRef.value?.setCheckedKeys(menuIds)
   })
+}
+
+function handleNewRole() {
+  handleNewClick()
+  treeRef.value?.setCheckedKeys([])
 }
 </script>
 
