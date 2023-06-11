@@ -3,12 +3,12 @@
     <page-search :search-config="searchConfig" @query-click="handleQueryClick" @reset-click="handleResetClick" />
     <page-content :content-config="contentConfig" ref="contentRef" @new-click="handleNewClick"
       @edit-click="handleEditClick">
-      <template #leader="scope">
+      <!-- <template #leader="scope">
         <span class="leader">哈哈哈: {{ scope.row[scope.prop] }}</span>
       </template>
       <template #parent="scope">
         <span class="parent">呵呵呵: {{ scope.row[scope.prop] }}</span>
-      </template>
+      </template> -->
     </page-content>
     <page-modal :modal-config="modalConfigRef" ref="modalRef" />
   </div>
