@@ -47,6 +47,7 @@ declare module '@vue/runtime-core' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     HeadCrumb: typeof import('./src/components/nav-header/c-cpns/head-crumb.vue')['default']
     HeadInfo: typeof import('./src/components/nav-header/c-cpns/head-info.vue')['default']
