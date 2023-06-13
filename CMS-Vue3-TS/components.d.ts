@@ -9,11 +9,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BarEchart: typeof import('./src/components/page-echarts/src/bar-echart.vue')['default']
+    BaseEchart: typeof import('./src/components/page-echarts/src/base-echart.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -57,11 +60,13 @@ declare module '@vue/runtime-core' {
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    LineEchart: typeof import('./src/components/page-echarts/src/line-echart.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/index.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/index.vue')['default']
     PageContent: typeof import('./src/components/page-content/page-content.vue')['default']
     PageModal: typeof import('./src/components/page-modal/page-modal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/page-search.vue')['default']
+    PieEchart: typeof import('./src/components/page-echarts/src/pie-echart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
