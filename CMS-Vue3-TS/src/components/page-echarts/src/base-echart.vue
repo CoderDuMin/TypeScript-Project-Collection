@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import * as Echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 
 interface IProps {
   option: any,
@@ -17,8 +17,8 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   option: {
     title: {
-      text: 'Referer of a Website',
-      subtext: 'Fake Data',
+      // text: 'Referer of a Website',
+      // subtext: 'Fake Data',
       left: 'center'
     },
     tooltip: {
@@ -57,7 +57,9 @@ const echartRef = ref()
 
 onMounted(() => {
   const instance = Echarts.init(echartRef.value, 'light')
-  instance.setOption(props.option)
+  watchEffect(() => {
+    instance.setOption(props.option)
+  })
 })
 
 

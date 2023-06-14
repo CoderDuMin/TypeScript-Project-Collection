@@ -5,3 +5,15 @@ export function getAmountListData() {
       url: "/goods/amount/list",
   })
 }
+
+export function getGoodsCategoryCount() {
+  return dmRequest.get({
+      url: "/goods/category/count",
+  })
+}
+
+export function getGoodsCategorySale() {
+  return dmRequest.get({
+      url: "/goods/category/sale",
+  })
+}
