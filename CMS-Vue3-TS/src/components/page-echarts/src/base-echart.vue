@@ -7,13 +7,13 @@
 <script setup lang="ts">
 import * as Echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
 interface IProps {
   option: any,
   height: string
 }
-
+let instance: any = null
 const props = withDefaults(defineProps<IProps>(), {
   option: {
     title: {
@@ -55,11 +55,20 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const echartRef = ref()
 
+const resizeHook = () => {
+  console.log('resize')
+  instance?.resize()
+}
+
 onMounted(() => {
-  const instance = Echarts.init(echartRef.value, 'light')
+  instance = Echarts.init(echartRef.value, 'light')
+  window.addEventListener('resize', resizeHook)
   watchEffect(() => {
     instance.setOption(props.option)
   })
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeHook)
 })
 
 

@@ -5,24 +5,31 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import baseEchart from './base-echart.vue';
-const option = {
-  xAxis: {
-    type: 'category',
-    boundaryGap: false,
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [820, 932, 901, 934, 1290, 1330, 1320],
-      type: 'line',
-      areaStyle: {}
-    }
-  ]
-};
+const props = defineProps<{
+  labels: string[],
+  values: any[]
+}>()
+const option = computed(() => {
+  return {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: props.labels
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: props.values,
+        type: 'line',
+        areaStyle: {}
+      }
+    ]
+  };
+})
 </script>
 
 <style scoped lang="scss">

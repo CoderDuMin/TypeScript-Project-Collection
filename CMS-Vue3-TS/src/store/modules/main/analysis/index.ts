@@ -1,10 +1,12 @@
-import { getAmountListData, getGoodsCategoryCount, getGoodsCategorySale } from '@/service/modules/analysis'
+import { getAmountListData, getGoodsCategoryCount, getGoodsCategoryFavor, getGoodsCategorySale, getGoodsTopCount } from '@/service/modules/analysis'
 import { defineStore } from 'pinia'
 
 interface IState {
   amountList:any[],
   goodsCategoryCount:any[],
-  goodsCategorySale:any[]
+  goodsCategorySale:any[],
+  goodsCategoryFavor:any[],
+  goodsTop:any[]
 }
 
 const useAnalySisStore = defineStore('analysis',{
@@ -12,7 +14,9 @@ const useAnalySisStore = defineStore('analysis',{
     return {
       amountList:[],
       goodsCategoryCount:[],
-      goodsCategorySale:[]
+      goodsCategorySale:[],
+      goodsCategoryFavor:[],
+      goodsTop:[]
     }
   },
   actions:{
@@ -25,6 +29,12 @@ const useAnalySisStore = defineStore('analysis',{
       })
       getGoodsCategorySale().then(res => {
         this.goodsCategorySale = res.data
+      })
+      getGoodsCategoryFavor().then(res => {
+        this.goodsCategoryFavor = res.data
+      })
+      getGoodsTopCount().then(res => {
+        this.goodsTop = res.data
       })
     }
   }

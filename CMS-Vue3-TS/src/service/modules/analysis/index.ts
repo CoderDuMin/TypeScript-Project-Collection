@@ -17,3 +17,13 @@ export function getGoodsCategorySale() {
       url: "/goods/category/sale",
   })
 }
+export function getGoodsCategoryFavor() {
+  return dmRequest.get({
+      url: "/goods/category/favor",
+  })
+}
+export function getGoodsTopCount() {
+  return dmRequest.get({
+      url: "/goods/sale/top10",
+  })
+}
