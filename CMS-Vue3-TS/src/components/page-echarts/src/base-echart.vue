@@ -8,6 +8,8 @@
 import * as Echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import ChinaJSON from '../data/china.json'
+Echarts.registerMap('china', ChinaJSON as any)
 
 interface IProps {
   option: any,

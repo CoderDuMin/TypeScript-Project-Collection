@@ -15,7 +15,7 @@
       </el-col>
       <el-col :span="8">
         <ChartCard title="商品地区销量统计">
-          <LineEchart v-bind="categorySaleData" />
+          <MapEchart :map-data="citySaleCount" />
         </ChartCard>
       </el-col>
       <el-col :span="8">
@@ -44,12 +44,12 @@ import { storeToRefs } from 'pinia';
 import useAnalysisStore from '@/store/modules/main/analysis/index'
 import CountCard from './c-cpns/count-card/count-card.vue';
 import ChartCard from './c-cpns/chart-card/cahrt-card.vue'
-import { BarEchart, PieEchart, LineEchart, RoseEchart } from '@/components/page-echarts'
+import { BarEchart, PieEchart, LineEchart, RoseEchart, MapEchart } from '@/components/page-echarts'
 import { computed } from 'vue';
 
 const analysisStore = useAnalysisStore()
 analysisStore.fetchAmountListDataAction()
-const { amountList, goodsCategoryCount, goodsCategorySale, goodsCategoryFavor } = storeToRefs(analysisStore)
+const { amountList, goodsCategoryCount, goodsCategorySale, goodsCategoryFavor, citySale } = storeToRefs(analysisStore)
 const categoryCount = computed(() => {
   return goodsCategoryCount.value.map(item => ({ name: item.name, value: item.goodsCount }))
 })
@@ -71,6 +71,14 @@ const categoryFavor = computed(() => {
     labels,
     values
   }
+})
+const citySaleCount = computed(() => {
+  return citySale.value.map(item => {
+    return {
+      name: item.address,
+      value: item.count
+    }
+  })
 })
 </script>
 

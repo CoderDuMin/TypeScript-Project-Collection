@@ -61,6 +61,7 @@ declare module '@vue/runtime-core' {
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     LineEchart: typeof import('./src/components/page-echarts/src/line-echart.vue')['default']
+    MapEchart: typeof import('./src/components/page-echarts/src/map-echart.vue')['default']
     NavHeader: typeof import('./src/components/nav-header/index.vue')['default']
     NavMenu: typeof import('./src/components/nav-menu/index.vue')['default']
     PageContent: typeof import('./src/components/page-content/page-content.vue')['default']

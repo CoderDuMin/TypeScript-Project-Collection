@@ -27,3 +27,8 @@ export function getGoodsTopCount() {
       url: "/goods/sale/top10",
   })
 }
+export function getGoodsCitySale() {
+  return dmRequest.get({
+      url: "/goods/address/sale",
+  })
+}
