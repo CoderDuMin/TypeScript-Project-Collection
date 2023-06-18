@@ -64,6 +64,7 @@ const defaultActive = computed(() => {
 .nav-menu {
   height: 100%;
   background-color: #001529;
+  overflow-x: hidden;
 
   .logo {
     display: flex;

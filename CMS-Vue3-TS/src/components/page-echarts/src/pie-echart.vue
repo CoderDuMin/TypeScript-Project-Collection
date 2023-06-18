@@ -16,23 +16,21 @@ interface IProps {
 const props = defineProps<IProps>()
 const options = computed(() => {
   return {
-    title: {
-      // text: 'Referer of a Website',
-      // subtext: 'Fake Data',
-      left: 'center'
-    },
+    // 手指放上去的时候显示的文本
     tooltip: {
       trigger: 'item'
     },
+    // 图例:
     legend: {
-      orient: 'vertical',
+      orient: 'horizontal',
       left: 'left'
     },
     series: [
       {
-        name: 'Access From',
+        name: '访问来源',
         type: 'pie',
         radius: '50%',
+        bottom: '-10%',
         data: props.pieData,
         emphasis: {
           itemStyle: {

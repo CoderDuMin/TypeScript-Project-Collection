@@ -15,10 +15,6 @@ interface IProps {
 const props = defineProps<IProps>()
 const options = computed(() => {
   return {
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)'
-    },
     toolbox: {
       show: true,
       feature: {
@@ -28,22 +24,29 @@ const options = computed(() => {
         saveAsImage: { show: true }
       }
     },
+    tooltip: {
+      trigger: 'item'
+    },
     series: [
       {
-        name: '销量',
+        name: '访问来源',
         type: 'pie',
+        // 内半径/外半径的大小
         radius: [10, 160],
         // 设置区域的位置
         center: ['50%', '50%'],
         bottom: '-15%',
-        roseType: 'area',
+        roseType: 'area', // 圆心角一样, 通过半径的不同表示大小
         itemStyle: {
           borderRadius: 8
         },
-        data: props.roseData
+        data: props.roseData,
+        label: {
+          show: false
+        }
       }
     ]
-  };
+  }
 })
 </script>
 

@@ -2,7 +2,7 @@
   <div class="dashboard">
     <el-row :gutter="10">
       <template v-for="item in amountList" :key="item.amount">
-        <el-col :span="6">
+        <el-col :span="6" :lg="6" :md="8" :sm="12" :xs="24">
           <CountCard v-bind="item" />
         </el-col>
       </template>
@@ -38,6 +38,8 @@
     </el-row>
   </div>
 </template>
+
+
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -87,7 +89,7 @@ const citySaleCount = computed(() => {
   color: red;
 }
 
-.el-row {
+.el-row .el-col {
   margin-bottom: 10px;
 }
 </style>

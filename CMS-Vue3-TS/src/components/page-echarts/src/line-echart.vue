@@ -13,6 +13,9 @@ const props = defineProps<{
 }>()
 const option = computed(() => {
   return {
+    tooltip: {
+      trigger: 'item'
+    },
     xAxis: {
       type: 'category',
       boundaryGap: false,
