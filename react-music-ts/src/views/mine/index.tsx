@@ -3,8 +3,8 @@ import type { ReactNode, FC } from "react"
 interface IProp {
   children?: ReactNode[]
 }
-const Demo: FC<IProp> = () => {
-  return <div>demo</div>
+const Mine: FC<IProp> = () => {
+  return <div>Mine</div>
 }
 
-export default Demo
+export default Mine

@@ -1,7 +1,10 @@
 import React from "react"
-
-const Discover = () => {
-  return <div>discover</div>
+import type { ReactNode, FC } from "react"
+interface IProp {
+  children?: ReactNode[]
+}
+const Discover: FC<IProp> = () => {
+  return <div>Discover</div>
 }
 
 export default Discover
